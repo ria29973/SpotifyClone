@@ -1,8 +1,7 @@
 import {Router} from "express";
+import { protectRoute} from "../middleware/auth.middleware.js";
+import { getAllUsers } from "../controller/user.controller.js"
 
 const router = Router();
-router.get("/", (req, res) => {
-    console.log("GET /api/users hit");
-    res.send("user route");
-});
+router.get("/", protectRoute, getAllUsers);
 export default router; 
