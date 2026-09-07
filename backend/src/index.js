@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import fileUpload from "express-fileupload"; 
+import cors from "cors";
 import path from "path"; 
 import { clerkMiddleware } from '@clerk/express'
 import {connectDB} from "./lib/db.js";
@@ -30,6 +31,12 @@ app.use(fileUpload({
 })); 
 
 const PORT = process.env.PORT;
+app.use(cors(
+    {
+        origin: "http://localhost:5173", 
+        credentials: true,
+    }
+)); 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
